@@ -1,53 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+
 
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
+  View,
   Text,
-  View
+  TouchableHighlight
 } from 'react-native';
 
+var facts = require("./facts")
+
 export default class Franklin extends Component {
+
+   getRandomInt(min, max) {
+     min = Math.ceil(min);
+     max = Math.floor(max);
+     return Math.floor(Math.random() * (max - min)) + min;
+   }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+      <View style={{flex:1,backgroundColor:'#FF5E3A',alignItems:'center',justifyContent:'center'}}>
+            <View style={{flex:0.5,alignItems:'center',justifyContent:'center'}}>
+               <Text style={{fontSize:30,fontFamily:'AvenirNext-Bold',color:'#FFFFFF',textAlign:'center'}}> {facts[this.getRandomInt(0,13)].virtue}</Text>
+            </View>
+            <View style={{flex:2,marginLeft:50,marginRight:50,marginBottom:50,alignItems:'center',justifyContent:'center',backgroundColor:'transparent',opacity:1}}>
+               <Text style={{fontSize:30,fontFamily:'AvenirNext-Bold',color:'#FFFFFF',textAlign:'center'}}> {facts[this.getRandomInt(0,13)].detail}</Text>
+            </View>
+            <View style={{flex:1,marginBottom:50}}>
+               <TouchableHighlight underlayColor= '#EEEEEE' onPress = {()=>{this.setState({random:Math.random()})}}  style={{height:100,width:200,backgroundColor:'#FFFFFF',opacity:0.8,alignItems:'center',justifyContent:'center'}}>
+                     <Text style={{fontSize:20,fontFamily:'AvenirNext-Bold',textAlign:'center'}}>Next Virtue</Text>
+               </TouchableHighlight>
+            </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('Franklin', () => Franklin);
